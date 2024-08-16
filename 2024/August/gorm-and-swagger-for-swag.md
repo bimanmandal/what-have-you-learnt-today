@@ -14,8 +14,7 @@ go get "github.com/lib/pq"
 2. Create the connection
 
 ```go
-psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
-		"password=%s dbname=%s sslmode=disable",Host, Port, User, Password, Database)
+psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",Host, Port, User, Password, Database)
 db, err := sql.Open("postgres", psqlInfo)
 ```
 
@@ -30,26 +29,25 @@ I discovered that the same can be easily achieved using the GORM library in Go, 
 1. Get the package
 
 ```bash
-go get 	"gorm.io/driver/postgres"
-go get 	"gorm.io/gorm"
+go get   "gorm.io/driver/postgres"
+go get   "gorm.io/gorm"
 
 ```
 
 2. Create the connection
 
 ```go
-psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
-		"password=%s dbname=%s sslmode=disable",Host, Port, User, Password, Database)
+psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",Host, Port, User, Password, Database)
 db, err := gorm.Open(postgres.Open(psqlInfo), &gorm.Config{})
 ```
 
 3. Declare the model
 ```go
 type Customer struct {
-	Id 				 	 string `json:"id" gorm:"column:cid"`
-	Name 				 string `json:"name" gorm:"column:cname"`
-	Mobile			 string `json:"mobile" gorm:"column:mno"`
-	LastSeen		 string `json:"lastSeen" gorm:"column:updated_on"`
+  Id           string `json:"id" gorm:"column:cid"`
+  Name         string `json:"name" gorm:"column:cname"`
+  Mobile       string `json:"mobile" gorm:"column:mno"`
+  LastSeen     string `json:"lastSeen" gorm:"column:updated_on"`
 }
 ```
 
@@ -75,15 +73,15 @@ go install github.com/swaggo/swag/cmd/swag@latest
   ```go
   // Customers godoc
   //
-  //	@Summary		Get list of Customers
-  //	@Description	Get Customers
-  //	@Tags			customers
-  //	@Accept			json
-  //	@Produce		json
-  //	@Success		200	{array}	mo.Customer
-  //	@Router			/customers [get]
+  //  @Summary    Get list of Customers
+  //  @Description  Get Customers
+  //  @Tags      customers
+  //  @Accept      json
+  //  @Produce    json
+  //  @Success    200  {array}  mo.Customer
+  //  @Router      /customers [get]
   func (d *CustomerHandler) ListCustomers(c *fiber.Ctx) error {
-  	return c.JSON(d.db.GetCustomers())
+    return c.JSON(d.db.GetCustomers())
   }
   ```
    > You can refer to this https://github.com/swaggo/swag?tab=readme-ov-file and [example](https://github.com/swaggo/swag/tree/master/example/celler) for more details.
@@ -94,11 +92,11 @@ go install github.com/swaggo/swag/cmd/swag@latest
 4. Create the necessary configurations.
 ```go
 cfg := swagger.Config{
-		BasePath: "/docs",
-		Path:     "docs",
-		FilePath: "./docs/swagger.json",
-		Title:    "Swagger API Docs",
-	}
+    BasePath: "/docs",
+    Path:     "docs",
+    FilePath: "./docs/swagger.json",
+    Title:    "Swagger API Docs",
+  }
 ```
 5. Install and Import swagger contri
 ```bash
@@ -121,12 +119,12 @@ go get "github.com/mvrilo/go-redoc"
 2. Create the configurations.
 ```go
 doc := redoc.Redoc{
-		Title:       "Customer Status API",
-		Description: "Customer Status",
-		SpecFile:    "./docs/swagger.json",
-		SpecPath:    "/swagger.json",
-		DocsPath:    "/redoc",
-	}
+    Title:       "Customer Status API",
+    Description: "Customer Status",
+    SpecFile:    "./docs/swagger.json",
+    SpecPath:    "/swagger.json",
+    DocsPath:    "/redoc",
+  }
 ```
 3. Incorporate it into the middleware.
 ```go
