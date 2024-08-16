@@ -73,15 +73,15 @@ go install github.com/swaggo/swag/cmd/swag@latest
 ```
 2. Add proper comments in the code.
   ```go
-  // GetDevices godoc
+  // Customers godoc
   //
-  //	@Summary		Get list of devices
-  //	@Description	get Devices
-  //	@Tags			devices
+  //	@Summary		Get list of Customers
+  //	@Description	Get Customers
+  //	@Tags			customers
   //	@Accept			json
   //	@Produce		json
-  //	@Success		200	{array}	vo.Device
-  //	@Router			/devices [get]
+  //	@Success		200	{array}	mo.Customer
+  //	@Router			/customers [get]
   func (d *CustomerHandler) ListCustomers(c *fiber.Ctx) error {
   	return c.JSON(d.db.GetCustomers())
   }
@@ -121,8 +121,8 @@ go get "github.com/mvrilo/go-redoc"
 2. Create the configurations.
 ```go
 doc := redoc.Redoc{
-		Title:       "Device Status API",
-		Description: "Device Status",
+		Title:       "Customer Status API",
+		Description: "Customer Status",
 		SpecFile:    "./docs/swagger.json",
 		SpecPath:    "/swagger.json",
 		DocsPath:    "/redoc",
