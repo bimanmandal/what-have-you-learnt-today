@@ -73,13 +73,13 @@ go install github.com/swaggo/swag/cmd/swag@latest
   ```go
   // Customers godoc
   //
-  //  @Summary    Get list of Customers
+  //  @Summary      Get list of Customers
   //  @Description  Get Customers
-  //  @Tags      customers
-  //  @Accept      json
-  //  @Produce    json
-  //  @Success    200  {array}  mo.Customer
-  //  @Router      /customers [get]
+  //  @Tags         customers
+  //  @Accept       json
+  //  @Produce      json
+  //  @Success      200  {array}  mo.Customer
+  //  @Router       /customers [get]
   func (d *CustomerHandler) ListCustomers(c *fiber.Ctx) error {
     return c.JSON(d.db.GetCustomers())
   }
